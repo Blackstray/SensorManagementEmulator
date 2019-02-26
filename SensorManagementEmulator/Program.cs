@@ -10,6 +10,7 @@ namespace SensorManagementEmulator
     {
         /// <summary>
         /// The main entry point for the application.
+        /// bandomasis komentaras
         /// </summary>
         [STAThread]
         static void Main()
