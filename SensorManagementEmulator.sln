@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorManagementEmulator", "SensorManagementEmulator\SensorManagementEmulator.csproj", "{CBD2E763-C3D3-42C0-8C8E-96A57FC3ED48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBD2E763-C3D3-42C0-8C8E-96A57FC3ED48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD2E763-C3D3-42C0-8C8E-96A57FC3ED48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD2E763-C3D3-42C0-8C8E-96A57FC3ED48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD2E763-C3D3-42C0-8C8E-96A57FC3ED48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD27EACB-7B65-43F1-B70A-607CF54E958A}
+	EndGlobalSection
+EndGlobal
