@@ -19,7 +19,7 @@ namespace SensorManagementEmulator
         public MainForm()
         {
             InitializeComponent();
-            this.Icon = new Icon("favicon.ico");
+            this.Icon = new Icon("../../favicon.ico");
             this.Text = "Sensor Data Emulator";
             LoadDataGridViewData();
             mainSensorDataGridView.AutoScroll = true;
