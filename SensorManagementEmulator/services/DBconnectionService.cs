@@ -13,16 +13,17 @@ namespace SensorManagementEmulator
 
     public class DBconnectionService
     {
-        private static string ConnectionString =
-                                                 "Server=91.211.246.37;" +
-                                                 "Port=3306;" +
-                                                 "Database=Emulator;" +
-                                                 "Uid=user1;" +
-                                                 "password=123456798;";
+        private static string ConnectionString;
         public static MySqlConnection DataBaseConnection;
 
-        public static void Connect()
+        public static void Connect(string username, string password, string serverHost)
         {
+            ConnectionString =
+            "Server=" + serverHost + ";" +
+                "Port=3306;" +
+                "Database=Emulator;" +
+                "Uid="+username+";" +
+                "password=" + password + ";";
             DataBaseConnection = new MySqlConnection(ConnectionString);
             DataBaseConnection.ConnectionString = ConnectionString;
         }

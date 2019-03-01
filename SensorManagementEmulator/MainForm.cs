@@ -128,7 +128,6 @@ namespace SensorManagementEmulator
         private void LoadDataGridViewData()
         {
             mainSensorDataGridView.sensorDGV.Rows.Clear();
-            DBconnectionService.Connect();
             foreach (var sensor in DBSelectionService.GetSensors())
             {
                 mainSensorDataGridView.sensorDGV.Rows.Add(sensor.Id, sensor.Name, sensor.Type, sensor.MinValue, sensor.MaxValue, sensor.GenInterValue);
