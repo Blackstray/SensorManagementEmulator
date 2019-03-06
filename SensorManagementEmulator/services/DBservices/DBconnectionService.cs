@@ -13,10 +13,10 @@ namespace SensorManagementEmulator
 
     public class DBconnectionService
     {
-        private static string ConnectionString;
-        public static MySqlConnection DataBaseConnection;
+        private string ConnectionString;
+        public MySqlConnection DataBaseConnection;
 
-        public static void Connect(string username, string password, string serverHost)
+        public void Connect(string username, string password, string serverHost)
         {
             ConnectionString =
             "Server=" + serverHost + ";" +

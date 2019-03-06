@@ -19,12 +19,11 @@ namespace SensorManagementEmulator.UserControls.DataGridView
 
         private void SensorDataGridView_Load(object sender, EventArgs e)
         {
-
         }
 
         private void sensorDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
     }
 }

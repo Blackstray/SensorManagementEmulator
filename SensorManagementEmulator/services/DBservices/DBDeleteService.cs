@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using SensorManagementEmulator.Constants;
 using SensorManagementEmulator.Models;
 
 namespace SensorManagementEmulator.services
@@ -19,12 +20,15 @@ namespace SensorManagementEmulator.services
             idSensor = @Id
             ;";
 
-            DBconnectionService.DataBaseConnection.Open();
-            MySqlCommand oCmd = new MySqlCommand(oString, DBconnectionService.DataBaseConnection);
+            DBconnectionService dBconnection = new DBconnectionService();
+            dBconnection.Connect(DBconnection.Username, DBconnection.Password, DBconnection.HostName);
+            dBconnection.DataBaseConnection.Open();
+
+            MySqlCommand oCmd = new MySqlCommand(oString, dBconnection.DataBaseConnection);
             oCmd.Parameters.AddWithValue("@Id", id);
             oCmd.Prepare();
             oCmd.ExecuteNonQuery();
-            DBconnectionService.DataBaseConnection.Close();
+            dBconnection.DataBaseConnection.Close();
         }
     }
 }

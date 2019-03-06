@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SensorManagementEmulator.Models;
+using SensorManagementEmulator.services;
 
 namespace SensorManagementEmulator.UserControls
 {
@@ -28,10 +29,11 @@ namespace SensorManagementEmulator.UserControls
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Invadil values");
+                MessageBox.Show("Invalid values");
                 return;
             }
-            DBInsertionService.Insert(sensor);
+            DBInsertionService inserSensor = new DBInsertionService();
+            inserSensor.InsertSensor(sensor);
             MessageBox.Show("Succesfully created!");
         }
 

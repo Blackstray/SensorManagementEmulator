@@ -51,6 +51,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,10 +63,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogInForm.cs">
+    <Compile Include="Constants\DBconnection.cs" />
+    <Compile Include="Models\SensorValueData.cs" />
+    <Compile Include="services\DBservices\DBCheckingService.cs" />
+    <Compile Include="services\DBservices\DBCreationService.cs" />
+    <Compile Include="services\EmulationServices\DataEmulationService.cs" />
+    <Compile Include="UserControls\Forms\EmulationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogInForm.Designer.cs">
+    <Compile Include="UserControls\Forms\EmulationForm.Designer.cs">
+      <DependentUpon>EmulationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Forms\LogInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\Forms\LogInForm.Designer.cs">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -77,15 +89,15 @@
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="services\DBconnectionService.cs" />
-    <Compile Include="services\DBDeleteService.cs" />
-    <Compile Include="services\DBInsertionService.cs" />
-    <Compile Include="services\DBSelectionService.cs" />
-    <Compile Include="services\DBUpdateService.cs" />
-    <Compile Include="UserControls\CreateOrEditForm.cs">
+    <Compile Include="services\DBservices\DBconnectionService.cs" />
+    <Compile Include="services\DBservices\DBDeleteService.cs" />
+    <Compile Include="services\DBservices\DBInsertionService.cs" />
+    <Compile Include="services\DBservices\DBSelectionService.cs" />
+    <Compile Include="services\DBservices\DBUpdateService.cs" />
+    <Compile Include="UserControls\Forms\CreateOrEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserControls\CreateOrEditForm.Designer.cs">
+    <Compile Include="UserControls\Forms\CreateOrEditForm.Designer.cs">
       <DependentUpon>CreateOrEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\DataGridView\SensorDataGridView.cs">
@@ -94,10 +106,10 @@
     <Compile Include="UserControls\DataGridView\SensorDataGridView.Designer.cs">
       <DependentUpon>SensorDataGridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\PopUps\WarningForm.cs">
+    <Compile Include="UserControls\Forms\WarningForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserControls\PopUps\WarningForm.Designer.cs">
+    <Compile Include="UserControls\Forms\WarningForm.Designer.cs">
       <DependentUpon>WarningForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Sensor.cs">
@@ -112,7 +124,10 @@
     <Compile Include="UserControls\SensorCreateOtEdit.Designer.cs">
       <DependentUpon>SensorCreateOtEdit.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="LogInForm.resx">
+    <EmbeddedResource Include="UserControls\Forms\EmulationForm.resx">
+      <DependentUpon>EmulationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Forms\LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -127,13 +142,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\CreateOrEditForm.resx">
+    <EmbeddedResource Include="UserControls\Forms\CreateOrEditForm.resx">
       <DependentUpon>CreateOrEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\DataGridView\SensorDataGridView.resx">
       <DependentUpon>SensorDataGridView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\PopUps\WarningForm.resx">
+    <EmbeddedResource Include="UserControls\Forms\WarningForm.resx">
       <DependentUpon>WarningForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Sensor.resx">

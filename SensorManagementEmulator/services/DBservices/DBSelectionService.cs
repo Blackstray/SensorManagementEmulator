@@ -4,23 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using SensorManagementEmulator.Constants;
 using SensorManagementEmulator.Models;
 
 namespace SensorManagementEmulator
 {
     public class DBSelectionService
     {
-        public static IList<Sensor<double>> GetSensors()
+        public IList<Sensor<double>> GetSensors()
         {
             List<Sensor<double>> sensors = new List<Sensor<double>>();
-            DBconnectionService.DataBaseConnection.Open();
-            using (DBconnectionService.DataBaseConnection)
+
+            DBconnectionService dBconnection = new DBconnectionService();
+            dBconnection.Connect(DBconnection.Username, DBconnection.Password, DBconnection.HostName);
+            dBconnection.DataBaseConnection.Open();
+
+            using (dBconnection.DataBaseConnection)
             {
                 string oString = @"SELECT
                 Sensors.*
                     FROM Sensors";
 
-                MySqlCommand oCmd = new MySqlCommand(oString, DBconnectionService.DataBaseConnection);
+                MySqlCommand oCmd = new MySqlCommand(oString, dBconnection.DataBaseConnection);
                 Sensor<double> sensor = new Sensor<double>();
                 MySqlDataReader oReader = oCmd.ExecuteReader();
 
@@ -37,28 +42,31 @@ namespace SensorManagementEmulator
                     });
                 }
             }
-            DBconnectionService.DataBaseConnection.Close();
+            dBconnection.DataBaseConnection.Close();
             return sensors;
         }
 
-        public static Sensor<double> GetSensorById(int sensorId)
+        public Sensor<double> GetSensorById(int sensorId)
         {
-            DBconnectionService.DataBaseConnection.Open();
+
+            DBconnectionService dBconnection = new DBconnectionService();
+            dBconnection.Connect(DBconnection.Username, DBconnection.Password, DBconnection.HostName);
+            dBconnection.DataBaseConnection.Open();
+
             Sensor<double> sensor = new Sensor<double>();
-            using (DBconnectionService.DataBaseConnection)
+            using (dBconnection.DataBaseConnection)
             {
                 string oString = @"SELECT
                 Sensors.*
                     FROM Sensors
                     WHERE Sensors.idSensor = @id";
 
-                MySqlCommand oCmd = new MySqlCommand(oString, DBconnectionService.DataBaseConnection);
+                MySqlCommand oCmd = new MySqlCommand(oString, dBconnection.DataBaseConnection);
                 oCmd.Parameters.AddWithValue(@"id", sensorId);
                 MySqlDataReader oReader = oCmd.ExecuteReader();
 
                 while (oReader.Read())
                 {
-
                     sensor = new Sensor<double>()
                     {
                         Id = long.Parse(oReader["idSensor"].ToString()),
@@ -70,7 +78,7 @@ namespace SensorManagementEmulator
                     };
                 }
             }
-            DBconnectionService.DataBaseConnection.Close();
+           dBconnection.DataBaseConnection.Close();
             return sensor;
         }
     }

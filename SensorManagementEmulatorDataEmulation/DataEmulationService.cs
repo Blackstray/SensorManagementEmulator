@@ -8,6 +8,10 @@ namespace SensorManagementEmulatorDataEmulation
 {
     public class DataEmulationService
     {
-
+        public void EmulateDouble(int sensorId, string database, string table)
+        {
+            Random randomDouble = new Random();
+            
+        }
     }
 }
