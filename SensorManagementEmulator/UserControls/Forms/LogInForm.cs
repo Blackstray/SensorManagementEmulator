@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SensorManagementEmulator.Constants;
 
 namespace SensorManagementEmulator
 {
@@ -29,7 +30,12 @@ namespace SensorManagementEmulator
             try
             {
                 IPAddress.Parse(HostnameTextbox.Text);
-                DBconnectionService.Connect(UsernameTextbox.Text, PasswordTextbox.Text, HostnameTextbox.Text);
+                DBconnectionService dBconnection = new DBconnectionService();
+                dBconnection.Connect(UsernameTextbox.Text, PasswordTextbox.Text, HostnameTextbox.Text);
+
+                DBconnection.HostName = HostnameTextbox.Text;
+                DBconnection.Password = PasswordTextbox.Text;
+                DBconnection.Username = UsernameTextbox.Text;
                 new MainForm().Show();
                 this.Hide();
             }

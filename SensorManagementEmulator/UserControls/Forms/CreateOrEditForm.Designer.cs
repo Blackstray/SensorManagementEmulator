@@ -77,7 +77,7 @@
             // 
             // SensorCreate
             // 
-            this.SensorCreate.Location = new System.Drawing.Point(-3, 0);
+            this.SensorCreate.Location = new System.Drawing.Point(12, 3);
             this.SensorCreate.Name = "SensorCreate";
             this.SensorCreate.Size = new System.Drawing.Size(349, 268);
             this.SensorCreate.TabIndex = 0;

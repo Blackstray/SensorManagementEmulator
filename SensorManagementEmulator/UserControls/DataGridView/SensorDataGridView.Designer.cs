@@ -38,6 +38,8 @@
             this.CurrentValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EditSensor = new System.Windows.Forms.DataGridViewButtonColumn();
             this.DeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Emulate = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.EmulateSensor = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.sensorDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,10 +56,12 @@
             this.GenerationInterval,
             this.CurrentValue,
             this.EditSensor,
-            this.DeleteColumn});
+            this.DeleteColumn,
+            this.Emulate,
+            this.EmulateSensor});
             this.sensorDGV.Location = new System.Drawing.Point(0, 0);
             this.sensorDGV.Name = "sensorDGV";
-            this.sensorDGV.Size = new System.Drawing.Size(1093, 368);
+            this.sensorDGV.Size = new System.Drawing.Size(1266, 376);
             this.sensorDGV.TabIndex = 0;
             this.sensorDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sensorDGV_CellContentClick);
             // 
@@ -72,6 +76,7 @@
             // 
             this.SensorName.HeaderText = "Name";
             this.SensorName.Name = "SensorName";
+            this.SensorName.ReadOnly = true;
             // 
             // SensorValueType
             // 
@@ -83,21 +88,25 @@
             // 
             this.MinValue.HeaderText = "Min value";
             this.MinValue.Name = "MinValue";
+            this.MinValue.ReadOnly = true;
             // 
             // MaxValue
             // 
             this.MaxValue.HeaderText = "Max value";
             this.MaxValue.Name = "MaxValue";
+            this.MaxValue.ReadOnly = true;
             // 
             // GenerationInterval
             // 
             this.GenerationInterval.HeaderText = "Generation interval (ms)";
             this.GenerationInterval.Name = "GenerationInterval";
+            this.GenerationInterval.ReadOnly = true;
             // 
             // CurrentValue
             // 
             this.CurrentValue.HeaderText = "Current Value";
             this.CurrentValue.Name = "CurrentValue";
+            this.CurrentValue.ReadOnly = true;
             // 
             // EditSensor
             // 
@@ -120,13 +129,32 @@
             this.DeleteColumn.ToolTipText = "Delete sensor";
             this.DeleteColumn.UseColumnTextForButtonValue = true;
             // 
+            // Emulate
+            // 
+            this.Emulate.HeaderText = "Emulate";
+            this.Emulate.Name = "Emulate";
+            this.Emulate.ReadOnly = true;
+            this.Emulate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Emulate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Emulate.Text = "Emulate";
+            this.Emulate.ToolTipText = "Emulate sensor";
+            this.Emulate.UseColumnTextForButtonValue = true;
+            // 
+            // EmulateSensor
+            // 
+            this.EmulateSensor.FalseValue = "false";
+            this.EmulateSensor.HeaderText = "Emulate selected";
+            this.EmulateSensor.IndeterminateValue = "false";
+            this.EmulateSensor.Name = "EmulateSensor";
+            this.EmulateSensor.TrueValue = "true";
+            // 
             // SensorDataGridView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.sensorDGV);
             this.Name = "SensorDataGridView";
-            this.Size = new System.Drawing.Size(1063, 287);
+            this.Size = new System.Drawing.Size(1266, 376);
             this.Load += new System.EventHandler(this.SensorDataGridView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sensorDGV)).EndInit();
             this.ResumeLayout(false);
@@ -144,5 +172,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentValue;
         private System.Windows.Forms.DataGridViewButtonColumn EditSensor;
         private System.Windows.Forms.DataGridViewButtonColumn DeleteColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn Emulate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn EmulateSensor;
     }
 }

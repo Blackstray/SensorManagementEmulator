@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using SensorManagementEmulator.Constants;
 using SensorManagementEmulator.Models;
 
 namespace SensorManagementEmulator.services
@@ -12,8 +13,13 @@ namespace SensorManagementEmulator.services
     {
         public static Sensor<double> UpdateSensorByNewSensor(Sensor<double> sensor)
         {
-            DBconnectionService.DataBaseConnection.Open();
-            using (DBconnectionService.DataBaseConnection)
+
+            DBconnectionService dBconnection = new DBconnectionService();
+            dBconnection.Connect(DBconnection.Username, DBconnection.Password, DBconnection.HostName);
+            dBconnection.DataBaseConnection.Open();
+
+
+            using (dBconnection.DataBaseConnection)
             {
                 string oString = @"
                 USE Emulator;
@@ -29,7 +35,7 @@ namespace SensorManagementEmulator.services
                 idSensor = @Id
             ;";
 
-                MySqlCommand oCmd = new MySqlCommand(oString, DBconnectionService.DataBaseConnection);
+                MySqlCommand oCmd = new MySqlCommand(oString, dBconnection.DataBaseConnection);
 
                 oCmd.Parameters.AddWithValue("@Name", sensor.Name);
                 oCmd.Parameters.AddWithValue("@Type", sensor.Type);
@@ -40,7 +46,7 @@ namespace SensorManagementEmulator.services
 
                 oCmd.ExecuteNonQuery();
             }
-            DBconnectionService.DataBaseConnection.Close();
+           dBconnection.DataBaseConnection.Close();
             return sensor;
         }
     }
