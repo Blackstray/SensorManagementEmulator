@@ -8,13 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SensorManagementEmulator
+namespace SensorManagementEmulator.UserControls.PopUps
 {
-    public partial class Form1 : Form
+    public partial class WarningForm : Form
     {
-        public Form1()
+        public WarningForm()
         {
             InitializeComponent();
+            this.Icon = new Icon("favicon.ico");
+        }
+
+        private void WarningForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
