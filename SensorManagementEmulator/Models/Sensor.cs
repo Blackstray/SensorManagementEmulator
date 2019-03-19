@@ -7,9 +7,14 @@ namespace SensorManagementEmulator.Models
     public class Sensor<T>
     {
         public long Id;
+        public string id;
+        public IDictionary<string, double> values;
+        public IDictionary<string, double[]> MinMax;
+        public IDictionary<string, string> Units;
         public T CurrentValue;
         public T MinValue;
         public T MaxValue;
+
         public string Name;
         public string Type;
         public int GenInterValue;

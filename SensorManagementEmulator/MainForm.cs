@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SensorManagementEmulator.Firebase;
 using SensorManagementEmulator.Models;
 using SensorManagementEmulator.services;
 using SensorManagementEmulator.UserControls;
@@ -68,19 +69,19 @@ namespace SensorManagementEmulator
 
         private void EmulateData(DataGridViewCellEventArgs e, EmulationForm form)
         {
-
-            Task.Factory.StartNew(async () =>
+            foreach (var value in ((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value).MinMax)
             {
-                DataEmulationService sensorEmulation = new DataEmulationService();
-                DBSelectionService selectSensor = new DBSelectionService();
-                form.Closing += (sender, args) =>
+                Task.Factory.StartNew(async () =>
                 {
-                    sensorEmulation.StopEmulation.Invoke(true);
-                };
-                await sensorEmulation.EmulateDoubleList(
-                    selectSensor.GetSensorById(int.Parse(mainSensorDataGridView.sensorDGV.Rows[e.RowIndex]
-                        .Cells[0].Value.ToString())), "SensorData", "SensorsDataValues");
-            });
+                    DataEmulationService sensorEmulation = new DataEmulationService();
+                    form.Closing += (sender, args) =>
+                    {
+                        sensorEmulation.StopEmulation.Invoke(true);
+                    };
+                    await sensorEmulation.EmulateDoubleTemp((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value, value.Key);
+                });
+            }
+           
         }
         private void mainSensorDataGridView_Load(object sender, EventArgs e)
         {
@@ -157,13 +158,14 @@ namespace SensorManagementEmulator
             form.Show();
         }
 
-        private void LoadDataGridViewData()
+        private async Task LoadDataGridViewData()
         {
-            mainSensorDataGridView.sensorDGV.Rows.Clear();
-            DBSelectionService selectSensor = new DBSelectionService();
-            foreach (var sensor in selectSensor.GetSensors())
+            var FBService = new FireBaseDataRetrieve();
+            var sensors = await FBService.RetrieveAllDocuments(FBConst.ProjectName);
+
+            foreach (var sensor in sensors)
             {
-                mainSensorDataGridView.sensorDGV.Rows.Add(sensor.Id, sensor.Name, sensor.Type, sensor.MinValue, sensor.MaxValue, sensor.GenInterValue);
+                mainSensorDataGridView.sensorDGV.Rows.Add(sensor.id,sensor.Name,sensor);
 
             }
         }

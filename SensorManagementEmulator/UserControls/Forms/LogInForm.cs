@@ -23,6 +23,7 @@ namespace SensorManagementEmulator
         {
             this.Icon = new Icon("../../favicon.ico");
             this.Text = "Login form";
+            this.PasswordTextbox.PasswordChar = '*';
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

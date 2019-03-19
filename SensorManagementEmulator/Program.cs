@@ -13,12 +13,17 @@ namespace SensorManagementEmulator
         /// bandomasis komentaras
         /// </summary>
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
+
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "b1192.json");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogInForm());
-            
+            Application.Run(new MainForm());
+
+            //var asin = new FireBaseDataRetrieve();
+            //await asin.RetrieveAllDocuments("sensormanagementproject");
+
         }
     }
 }
