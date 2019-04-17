@@ -11,13 +11,16 @@ namespace SensorManagementEmulator
         /// <summary>
         /// The main entry point for the application.
         /// bandomasis komentaras
-        /// </summary>
+        /// </summary>ww
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
+
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "b1192.json");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
+
         }
     }
 }
