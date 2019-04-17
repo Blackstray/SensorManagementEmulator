@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SensorManagementEmulator.Models;
 
 namespace SensorManagementEmulator.UserControls.DataGridView
 {
@@ -23,7 +24,8 @@ namespace SensorManagementEmulator.UserControls.DataGridView
 
         private void sensorDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
+
     }
 }

@@ -40,9 +40,6 @@ namespace SensorManagementEmulator.UserControls
             sensor = new Sensor<double>
             {
                 Name = NameTextBox.Text,
-                MinValue = double.Parse(MinValueTextBox.Text),
-                MaxValue = double.Parse(MaxValueTextBox.Text),
-                GenInterValue = int.Parse(GenerationIntervalTextBox.Text),
                 Type = TypeTextBox.Text
             };
             if (withId)
@@ -51,6 +48,11 @@ namespace SensorManagementEmulator.UserControls
             }
 
             return sensor;
+        }
+
+        private void GenerationInterval_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

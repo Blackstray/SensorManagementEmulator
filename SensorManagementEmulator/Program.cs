@@ -11,7 +11,7 @@ namespace SensorManagementEmulator
         /// <summary>
         /// The main entry point for the application.
         /// bandomasis komentaras
-        /// </summary>
+        /// </summary>ww
         [STAThread]
         static async Task Main()
         {
@@ -20,9 +20,6 @@ namespace SensorManagementEmulator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-
-            //var asin = new FireBaseDataRetrieve();
-            //await asin.RetrieveAllDocuments("sensormanagementproject");
 
         }
     }

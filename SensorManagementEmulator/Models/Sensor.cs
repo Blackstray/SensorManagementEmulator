@@ -8,10 +8,10 @@ namespace SensorManagementEmulator.Models
     {
         public long Id;
         public string id;
-        public IDictionary<string, double> values;
-        public IDictionary<string, double[]> MinMax;
+        public IDictionary<string, T> values;
+        public IDictionary<string, T[]> MinMax;
         public IDictionary<string, string> Units;
-        public T CurrentValue;
+        public IDictionary<string, int> GenerIntervals;
         public T MinValue;
         public T MaxValue;
 

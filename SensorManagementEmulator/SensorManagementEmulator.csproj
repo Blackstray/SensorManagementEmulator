@@ -175,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Firestore" Version="1.0.0-beta19" />
+    <PackageReference Include="MySql.Data">
+      <Version>8.0.15</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\icons\" />

@@ -33,6 +33,9 @@
             this.CancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SensorCreate = new SensorManagementEmulator.UserControls.SensorCreateOtEdit();
+            this.GenInterTextbox = new System.Windows.Forms.TextBox();
+            this.ValueTextbox = new System.Windows.Forms.TextBox();
+            this.MinMaxTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CreateButton
@@ -83,11 +86,35 @@
             this.SensorCreate.TabIndex = 0;
             this.SensorCreate.Load += new System.EventHandler(this.SensorCreate_Load);
             // 
+            // GenInterTextbox
+            // 
+            this.GenInterTextbox.Location = new System.Drawing.Point(368, 168);
+            this.GenInterTextbox.Name = "GenInterTextbox";
+            this.GenInterTextbox.Size = new System.Drawing.Size(163, 20);
+            this.GenInterTextbox.TabIndex = 7;
+            // 
+            // ValueTextbox
+            // 
+            this.ValueTextbox.Location = new System.Drawing.Point(368, 141);
+            this.ValueTextbox.Name = "ValueTextbox";
+            this.ValueTextbox.Size = new System.Drawing.Size(163, 20);
+            this.ValueTextbox.TabIndex = 6;
+            // 
+            // MinMaxTextbox
+            // 
+            this.MinMaxTextbox.Location = new System.Drawing.Point(368, 114);
+            this.MinMaxTextbox.Name = "MinMaxTextbox";
+            this.MinMaxTextbox.Size = new System.Drawing.Size(163, 20);
+            this.MinMaxTextbox.TabIndex = 5;
+            // 
             // CreateOrEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 433);
+            this.ClientSize = new System.Drawing.Size(602, 433);
+            this.Controls.Add(this.GenInterTextbox);
+            this.Controls.Add(this.ValueTextbox);
+            this.Controls.Add(this.MinMaxTextbox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
@@ -107,5 +134,8 @@
         public System.Windows.Forms.Button CancelButton;
         public System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox GenInterTextbox;
+        public System.Windows.Forms.TextBox ValueTextbox;
+        public System.Windows.Forms.TextBox MinMaxTextbox;
     }
 }

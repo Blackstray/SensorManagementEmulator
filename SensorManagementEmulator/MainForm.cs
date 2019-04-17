@@ -29,6 +29,15 @@ namespace SensorManagementEmulator
             mainSensorDataGridView.AutoScroll = true;
             mainSensorDataGridView.VerticalScroll.Enabled = true;
             mainSensorDataGridView.sensorDGV.CellContentClick += SensorDGV_CellContentClick;
+            mainSensorDataGridView.sensorDGV.AllowUserToAddRows = false;
+            SensortCreateButton.Enabled = true;
+            ToolTip buttonToolTip = new ToolTip();
+            buttonToolTip.SetToolTip(SensortCreateButton, "temporary disabled");
+            SensortCreateButton.DragOver += (sender, args) =>
+            {
+                buttonToolTip.Show("", SensortCreateButton);
+            };
+
         }
 
         private void SensorDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -37,19 +46,15 @@ namespace SensorManagementEmulator
             {
                 return;
             }
-            if (e.RowIndex == mainSensorDataGridView.sensorDGV.Rows.GetLastRow(DataGridViewElementStates.Visible))
-            {
-                return;
-            }
             if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell)
             {
-                if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().CompareTo("Edit") == 0)
+                if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().CompareTo("More") == 0)
                 {
                     SensorEditing(e);
                 }
                 else if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().CompareTo("Delete") == 0)
                 {
-                    SensorDeletion(e);
+                   // SensorDeletion(e);
                 }
                 else if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().CompareTo("Emulate") == 0)
                 {
@@ -81,7 +86,7 @@ namespace SensorManagementEmulator
                     await sensorEmulation.EmulateDoubleTemp((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value, value.Key);
                 });
             }
-           
+
         }
         private void mainSensorDataGridView_Load(object sender, EventArgs e)
         {
@@ -95,6 +100,7 @@ namespace SensorManagementEmulator
 
         private void SensortCreateButton_Click(object sender, EventArgs e)
         {
+            return;
             var form = new CreateOrEditForm();
             form.Show();
             form.Closed += (o, args) => { LoadDataGridViewData(); };
@@ -122,15 +128,7 @@ namespace SensorManagementEmulator
         private void SensorEditing(DataGridViewCellEventArgs e)
         {
             var form = new CreateOrEditForm();
-            form.CreateButton.Hide();
-            form.SensorCreate.IdTextBox.Text = mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[0].Value.ToString();
-            form.SensorCreate.NameTextBox.Text = mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[1].Value.ToString();
-            form.SensorCreate.TypeTextBox.Text = mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value.ToString();
-            form.SensorCreate.MinValueTextBox.Text = mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[3].Value.ToString();
-            form.SensorCreate.MaxValueTextBox.Text = mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[4].Value.ToString();
-            form.SensorCreate.GenerationIntervalTextBox.Text = mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[5].Value.ToString();
-
-            form.CancelButton.Click += (o, args) => { form.Close(); };
+            form.Init((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value);
 
             form.SaveButton.Click += (o, args) =>
             {
@@ -160,13 +158,15 @@ namespace SensorManagementEmulator
 
         private async Task LoadDataGridViewData()
         {
+            mainSensorDataGridView.sensorDGV.Rows.Clear();
             var FBService = new FireBaseDataRetrieve();
             var sensors = await FBService.RetrieveAllDocuments(FBConst.ProjectName);
 
+            int i = 0;
             foreach (var sensor in sensors)
             {
-                mainSensorDataGridView.sensorDGV.Rows.Add(sensor.id,sensor.Name,sensor);
-
+                mainSensorDataGridView.sensorDGV.Rows.Add(sensor.id, sensor.Name, sensor);
+                i++;
             }
         }
 
@@ -190,25 +190,28 @@ namespace SensorManagementEmulator
 
         private void EmulateSelectedButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < mainSensorDataGridView.sensorDGV.RowCount - 1; i++)
+            for (int i = 0; i < (mainSensorDataGridView.sensorDGV.RowCount); i++)
             {
-
-
                 if (mainSensorDataGridView.sensorDGV.Rows[i].Cells[mainSensorDataGridView.sensorDGV.ColumnCount - 1].Value is null)
                     continue;
                 bool temp = bool.Parse(mainSensorDataGridView.sensorDGV.Rows[i].Cells[mainSensorDataGridView.sensorDGV.ColumnCount - 1].Value.ToString());
                 if (temp)
                 {
                     var i1 = i;
-                    Task.Factory.StartNew(async () =>
-                    {
-                        
-                         DataEmulationService sensorEmulation = new DataEmulationService();
-                         DBSelectionService selectSensor = new DBSelectionService();
-                         StopEmulationButton.Click += (o, args) => {sensorEmulation.StopEmulation.Invoke(false); };
-                        await sensorEmulation.EmulateDoubleList(
-                             selectSensor.GetSensorById(int.Parse(mainSensorDataGridView.sensorDGV.Rows[i1].Cells[0].Value.ToString())), "SensorData", "SensorsDataValues");
-                     });
+                    foreach (var value in ((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[i].Cells[2].Value).MinMax)
+                    {            
+                        Task.Factory.StartNew(async () =>
+                        {
+                                await Task.Delay(50);
+                                DataEmulationService sensorEmulation = new DataEmulationService();
+                                StopEmulationButton.Click += (o, args) =>
+                                {
+                                    sensorEmulation.StopEmulation.Invoke(true);
+                                };
+                                await sensorEmulation.EmulateDoubleTemp((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[i1].Cells[2].Value, value.Key);
+                                
+                        });
+                    }
                 }
             }
         }

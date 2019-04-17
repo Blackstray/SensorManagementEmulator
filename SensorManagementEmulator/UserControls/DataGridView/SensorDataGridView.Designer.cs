@@ -32,10 +32,6 @@
             this.SensorIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SensorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SensorValueType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MinValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GenerationInterval = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EditSensor = new System.Windows.Forms.DataGridViewButtonColumn();
             this.DeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Emulate = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -51,17 +47,13 @@
             this.SensorIdColumn,
             this.SensorName,
             this.SensorValueType,
-            this.MinValue,
-            this.MaxValue,
-            this.GenerationInterval,
-            this.CurrentValue,
             this.EditSensor,
             this.DeleteColumn,
             this.Emulate,
             this.EmulateSensor});
             this.sensorDGV.Location = new System.Drawing.Point(0, 0);
             this.sensorDGV.Name = "sensorDGV";
-            this.sensorDGV.Size = new System.Drawing.Size(1266, 376);
+            this.sensorDGV.Size = new System.Drawing.Size(805, 358);
             this.sensorDGV.TabIndex = 0;
             this.sensorDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sensorDGV_CellContentClick);
             // 
@@ -70,7 +62,7 @@
             this.SensorIdColumn.HeaderText = "Id";
             this.SensorIdColumn.Name = "SensorIdColumn";
             this.SensorIdColumn.ReadOnly = true;
-            this.SensorIdColumn.Width = 45;
+            this.SensorIdColumn.Width = 150;
             // 
             // SensorName
             // 
@@ -84,39 +76,16 @@
             this.SensorValueType.Name = "SensorValueType";
             this.SensorValueType.ReadOnly = true;
             // 
-            // MinValue
-            // 
-            this.MinValue.HeaderText = "Min value";
-            this.MinValue.Name = "MinValue";
-            this.MinValue.ReadOnly = true;
-            // 
-            // MaxValue
-            // 
-            this.MaxValue.HeaderText = "Max value";
-            this.MaxValue.Name = "MaxValue";
-            this.MaxValue.ReadOnly = true;
-            // 
-            // GenerationInterval
-            // 
-            this.GenerationInterval.HeaderText = "Generation interval (ms)";
-            this.GenerationInterval.Name = "GenerationInterval";
-            this.GenerationInterval.ReadOnly = true;
-            // 
-            // CurrentValue
-            // 
-            this.CurrentValue.HeaderText = "Current Value";
-            this.CurrentValue.Name = "CurrentValue";
-            this.CurrentValue.ReadOnly = true;
-            // 
             // EditSensor
             // 
             this.EditSensor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.EditSensor.HeaderText = "Edit";
+            this.EditSensor.HeaderText = "More";
             this.EditSensor.Name = "EditSensor";
             this.EditSensor.ReadOnly = true;
-            this.EditSensor.Text = "Edit";
-            this.EditSensor.ToolTipText = "Edit sensor";
+            this.EditSensor.Text = "More";
+            this.EditSensor.ToolTipText = "More about sensor";
             this.EditSensor.UseColumnTextForButtonValue = true;
+            this.EditSensor.Width = 50;
             // 
             // DeleteColumn
             // 
@@ -128,6 +97,7 @@
             this.DeleteColumn.Text = "Delete";
             this.DeleteColumn.ToolTipText = "Delete sensor";
             this.DeleteColumn.UseColumnTextForButtonValue = true;
+            this.DeleteColumn.Width = 50;
             // 
             // Emulate
             // 
@@ -139,6 +109,7 @@
             this.Emulate.Text = "Emulate";
             this.Emulate.ToolTipText = "Emulate sensor";
             this.Emulate.UseColumnTextForButtonValue = true;
+            this.Emulate.Width = 50;
             // 
             // EmulateSensor
             // 
@@ -154,7 +125,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.sensorDGV);
             this.Name = "SensorDataGridView";
-            this.Size = new System.Drawing.Size(1266, 376);
+            this.Size = new System.Drawing.Size(806, 358);
             this.Load += new System.EventHandler(this.SensorDataGridView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sensorDGV)).EndInit();
             this.ResumeLayout(false);
@@ -166,10 +137,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SensorIdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SensorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SensorValueType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MinValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GenerationInterval;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentValue;
         private System.Windows.Forms.DataGridViewButtonColumn EditSensor;
         private System.Windows.Forms.DataGridViewButtonColumn DeleteColumn;
         private System.Windows.Forms.DataGridViewButtonColumn Emulate;

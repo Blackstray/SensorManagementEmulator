@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.SensortCreateButton = new System.Windows.Forms.Button();
             this.ListReloadButton = new System.Windows.Forms.Button();
             this.EmulateSelectedButton = new System.Windows.Forms.Button();
             this.StopEmulationButton = new System.Windows.Forms.Button();
             this.mainSensorDataGridView = new SensorManagementEmulator.UserControls.DataGridView.SensorDataGridView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // SensortCreateButton
@@ -57,7 +59,7 @@
             // 
             // EmulateSelectedButton
             // 
-            this.EmulateSelectedButton.Location = new System.Drawing.Point(984, 12);
+            this.EmulateSelectedButton.Location = new System.Drawing.Point(538, 12);
             this.EmulateSelectedButton.Name = "EmulateSelectedButton";
             this.EmulateSelectedButton.Size = new System.Drawing.Size(110, 23);
             this.EmulateSelectedButton.TabIndex = 4;
@@ -67,7 +69,7 @@
             // 
             // StopEmulationButton
             // 
-            this.StopEmulationButton.Location = new System.Drawing.Point(1100, 12);
+            this.StopEmulationButton.Location = new System.Drawing.Point(654, 12);
             this.StopEmulationButton.Name = "StopEmulationButton";
             this.StopEmulationButton.Size = new System.Drawing.Size(87, 23);
             this.StopEmulationButton.TabIndex = 5;
@@ -107,6 +109,7 @@
         private System.Windows.Forms.Button ListReloadButton;
         private System.Windows.Forms.Button EmulateSelectedButton;
         private System.Windows.Forms.Button StopEmulationButton;
+        public System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
