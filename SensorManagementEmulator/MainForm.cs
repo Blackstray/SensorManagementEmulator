@@ -54,7 +54,7 @@ namespace SensorManagementEmulator
                 }
                 else if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().CompareTo("Delete") == 0)
                 {
-                   // SensorDeletion(e);
+                    // SensorDeletion(e);
                 }
                 else if (mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().CompareTo("Emulate") == 0)
                 {
@@ -199,9 +199,11 @@ namespace SensorManagementEmulator
                 {
                     var i1 = i;
                     foreach (var value in ((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[i].Cells[2].Value).MinMax)
-                    {            
+                    {
                         Task.Factory.StartNew(async () =>
                         {
+                            try
+                            {
                                 await Task.Delay(50);
                                 DataEmulationService sensorEmulation = new DataEmulationService();
                                 StopEmulationButton.Click += (o, args) =>
@@ -209,7 +211,12 @@ namespace SensorManagementEmulator
                                     sensorEmulation.StopEmulation.Invoke(true);
                                 };
                                 await sensorEmulation.EmulateDoubleTemp((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[i1].Cells[2].Value, value.Key);
-                                
+                            }
+                            catch (Exception exception)
+                            {
+                                throw exception;
+                            }
+
                         });
                     }
                 }

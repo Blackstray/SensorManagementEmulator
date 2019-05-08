@@ -1,0 +1,138 @@
+namespace ValueGenerator
+{
+    class Program
+    {
+        public static Action<double> klaida;
+
+        static void Main(string[] args)
+        {
+            double skaicius = 2500;
+            int ecount = 0;
+            double enomValue = 0;
+            //double min = 10;
+            //double max = 200;
+            Task.Factory.StartNew(() =>
+            {
+                for (int i = 0; i < 1000000; i++)
+                {
+                    Console.WriteLine(skaicius);
+                    generateValue(2000, 5000, ref skaicius, true, ecount, enomValue);
+                }
+            });
+            Console.ReadKey();
+            //for (int i = 0; i < 1000000; i++)
+            //{
+            //    Console.WriteLine(skaicius);
+            //    generateValue(skaicius - 90, skaicius + 100, ref skaicius, false);
+            //}
+        }
+
+        public static void generateValue(double min, double max, ref double curValue, Boolean k, int ecount, double enomValue)
+        {
+            //klaida += b => { error = true; };
+            if (k == false)
+            {
+                //Vidutine reiksme
+                double nomValue = (max + min) / 2;
+                Random random = new Random();
+                //pridedama arba atimama reiksme
+                double modValue = nomValue * random.NextDouble() * 0.03;
+                double maxValue = nomValue + nomValue * 0.03;
+                double minValue = nomValue - nomValue * 0.03;
+                if (curValue < minValue || curValue > maxValue)
+                {
+                    curValue = nomValue;
+                }
+                if (curValue == nomValue)
+                {
+                    int chance = random.Next(0, 3);
+                    //Sugeneruojamas skaicius nuo 0 iki 2. Jei 2 pridedame, jei 0 atimame. Dar tikriname kad verte nekerta min arba maks reiksmiu.
+                    if (chance == 2 && curValue + modValue < maxValue)
+                    {
+                        curValue = curValue + modValue;
+                    }
+                    if (chance == 1 && curValue - modValue > minValue)
+                    {
+                        curValue = curValue - modValue;
+                    }
+                }
+                else if (curValue < nomValue)
+                {
+                    int chance = random.Next(0, 5);
+                    //Sugeneruojamas skaicius nuo 1 iki 4. Jei 1 atimame.
+                    if (chance == 1 && curValue - modValue > minValue)
+                    {
+                        curValue = curValue - modValue;
+                    }
+                    else
+                        curValue = curValue + modValue;
+                }
+                else if (curValue > nomValue)
+                {
+                    int chance = random.Next(0, 5);
+                    //Sugeneruojamas skaicius nuo 0 iki 5. Jei 2 pridedame
+                    if (chance == 2 && curValue + modValue < maxValue)
+                    {
+                        curValue = curValue + modValue;
+                    }
+                    else
+                        curValue = curValue - modValue;
+                }
+            }
+            else
+            {
+                //Vidutine reiksme
+                if (ecount == 0)
+                {
+                    enomValue = curValue;
+                }
+                double nomValue = enomValue;
+                Random random = new Random();
+                //pridedama arba atimama reiksme
+                double modValue = nomValue * random.NextDouble() * 0.03;
+                double maxValue = nomValue + nomValue * 0.03;
+                double minValue = nomValue - nomValue * 0.03;
+                //if (curValue < minValue || curValue > maxValue)
+                //{
+                //    curValue = nomValue;
+                //}
+                if (curValue == nomValue)
+                {
+                    int chance = random.Next(0, 3);
+                    //Sugeneruojamas skaicius nuo 0 iki 2. Jei 2 pridedame, jei 0 atimame. Dar tikriname kad verte nekerta min arba maks reiksmiu.
+                    if (chance == 2 && curValue + modValue < maxValue)
+                    {
+                        curValue = curValue + modValue;
+                    }
+                    if (chance == 1 && curValue - modValue > minValue)
+                    {
+                        curValue = curValue - modValue;
+                    }
+                }
+                else if (curValue < nomValue)
+                {
+                    int chance = random.Next(0, 5);
+                    //Sugeneruojamas skaicius nuo 1 iki 4. Jei 1 atimame.
+                    if (chance == 1 && curValue - modValue > minValue)
+                    {
+                        curValue = curValue - modValue;
+                    }
+                    else
+                        curValue = curValue + modValue;
+                }
+                else if (curValue > nomValue)
+                {
+                    int chance = random.Next(0, 5);
+                    //Sugeneruojamas skaicius nuo 0 iki 5. Jei 2 pridedame
+                    if (chance == 2 && curValue + modValue < maxValue)
+                    {
+                        curValue = curValue + modValue;
+                    }
+                    else
+                        curValue = curValue - modValue;
+                }
+            }
+            Thread.Sleep(500);
+        }
+    }
+}
