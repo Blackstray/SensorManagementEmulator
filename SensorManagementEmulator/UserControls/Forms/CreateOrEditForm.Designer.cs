@@ -31,7 +31,6 @@
             this.CreateButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SensorCreate = new SensorManagementEmulator.UserControls.SensorCreateOtEdit();
             this.GenInterTextbox = new System.Windows.Forms.TextBox();
             this.ValueTextbox = new System.Windows.Forms.TextBox();
@@ -68,15 +67,6 @@
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(310, 335);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
             // 
             // SensorCreate
             // 
@@ -115,7 +105,6 @@
             this.Controls.Add(this.GenInterTextbox);
             this.Controls.Add(this.ValueTextbox);
             this.Controls.Add(this.MinMaxTextbox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.CreateButton);
@@ -133,7 +122,6 @@
         public System.Windows.Forms.Button SaveButton;
         public System.Windows.Forms.Button CancelButton;
         public System.Windows.Forms.Button CreateButton;
-        private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox GenInterTextbox;
         public System.Windows.Forms.TextBox ValueTextbox;
         public System.Windows.Forms.TextBox MinMaxTextbox;

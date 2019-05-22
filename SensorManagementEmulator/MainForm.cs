@@ -64,7 +64,14 @@ namespace SensorManagementEmulator
         }
         private void Emulate(DataGridViewCellEventArgs e)
         {
+            Sensor<double> sensor = (Sensor<double>) mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value;
             var form = new EmulationForm();
+            form.EmulationDataChart.Enabled = false;
+            form.EmulationDataChart.Visible = false;
+            form.Icon = new Icon("../../favicon.ico");
+            form.Text = "Sensor Data Emulator";
+            form.IdLabel.Text = sensor.id;
+            form.NameLabel.Text = sensor.Name;
             form.EmulateButton.Click += (sender, args) =>
             {
                 EmulateData(e, form);
@@ -83,6 +90,10 @@ namespace SensorManagementEmulator
                     {
                         sensorEmulation.StopEmulation.Invoke(true);
                     };
+                    form.StopEmulationButton.Click += (sender, args) =>
+                    {
+                        sensorEmulation.StopEmulation.Invoke(true);
+                    };
                     await sensorEmulation.EmulateDoubleTemp((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value, value.Key);
                 });
             }
@@ -97,6 +108,8 @@ namespace SensorManagementEmulator
         {
 
         }
+        
+        
 
         private void SensortCreateButton_Click(object sender, EventArgs e)
         {
@@ -129,30 +142,39 @@ namespace SensorManagementEmulator
         {
             var form = new CreateOrEditForm();
             form.Init((Sensor<double>)mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[2].Value);
-
-            form.SaveButton.Click += (o, args) =>
+            ToolTip buttonToolTip = new ToolTip();
+            buttonToolTip.SetToolTip(SensortCreateButton, "temporary disabled");
+            buttonToolTip.InitialDelay = 0;
+            buttonToolTip.ReshowDelay = 0;
+            form.SaveButton.DragOver += (sender, args) =>
             {
-                Sensor<double> sensor = new Sensor<double>();
-                try
-                {
-                    sensor = form.SensorCreate.GenerateSensor(true);
-                }
-                catch (FormatException exception)
-                {
-                    MessageBox.Show("Invalid values");
-                }
-
-                if (IsDataChanged(int.Parse(mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[0].Value.ToString()), sensor))
-                {
-                    DBUpdateService.UpdateSensorByNewSensor(sensor);
-                    LoadDataGridViewData();
-                }
-                else
-                {
-                    form.Close();
-                }
-
+                buttonToolTip.Show("temporary disabled", form.SaveButton);
             };
+            form.SaveButton.Click += (sender, args) => { buttonToolTip.Show("temporary disabled", form.SaveButton); };
+
+            //form.SaveButton.Click += (o, args) =>
+            //{
+            //    Sensor<double> sensor = new Sensor<double>();
+            //    try
+            //    {
+            //        sensor = form.SensorCreate.GenerateSensor(true);
+            //    }
+            //    catch (FormatException exception)
+            //    {
+            //        MessageBox.Show("Invalid values");
+            //    }
+
+            //    if (IsDataChanged(int.Parse(mainSensorDataGridView.sensorDGV.Rows[e.RowIndex].Cells[0].Value.ToString()), sensor))
+            //    {
+            //        DBUpdateService.UpdateSensorByNewSensor(sensor);
+            //        LoadDataGridViewData();
+            //    }
+            //    else
+            //    {
+            //        form.Close();
+            //    }
+
+            //};
             form.Show();
         }
 
